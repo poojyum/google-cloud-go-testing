@@ -55,8 +55,6 @@ type Dataset interface {
 	Update(context.Context, DatasetMetadataToUpdate, string) (*DatasetMetadata, error)
 	Table(string) Table
 	Tables(context.Context) TableIterator
-
-	embedToIncludeNewMethods()
 }
 
 type DatasetIterator interface {
@@ -65,24 +63,18 @@ type DatasetIterator interface {
 	SetProjectID(string)
 	Next() (Dataset, error)
 	PageInfo() *iterator.PageInfo
-
-	embedToIncludeNewMethods()
 }
 
 type Extractor interface {
 	JobIDConfig() *bigquery.JobIDConfig
 	SetExtractConfig(ExtractConfig)
 	Run(context.Context) (Job, error)
-
-	embedToIncludeNewMethods()
 }
 
 type Loader interface {
 	JobIDConfig() *bigquery.JobIDConfig
 	SetLoadConfig(LoadConfig)
 	Run(context.Context) (Job, error)
-
-	embedToIncludeNewMethods()
 }
 
 type Job interface {
@@ -94,8 +86,6 @@ type Job interface {
 	Cancel(context.Context) error
 	Wait(context.Context) (*bigquery.JobStatus, error)
 	Read(context.Context) (RowIterator, error)
-
-	embedToIncludeNewMethods()
 }
 
 type JobIterator interface {
@@ -104,8 +94,6 @@ type JobIterator interface {
 	SetState(bigquery.State)
 	Next() (Job, error)
 	PageInfo() *iterator.PageInfo
-
-	embedToIncludeNewMethods()
 }
 
 type Query interface {
@@ -113,8 +101,6 @@ type Query interface {
 	SetQueryConfig(QueryConfig)
 	Run(context.Context) (Job, error)
 	Read(context.Context) (RowIterator, error)
-
-	embedToIncludeNewMethods()
 }
 
 type RowIterator interface {
@@ -123,8 +109,6 @@ type RowIterator interface {
 	TotalRows() uint64
 	Next(interface{}) error
 	PageInfo() *iterator.PageInfo
-
-	embedToIncludeNewMethods()
 }
 
 type Table interface {
@@ -141,15 +125,11 @@ type Table interface {
 	TableID() string
 	Update(context.Context, bigquery.TableMetadataToUpdate, string) (*bigquery.TableMetadata, error)
 	Uploader() Uploader
-
-	embedToIncludeNewMethods()
 }
 
 type TableIterator interface {
 	Next() (Table, error)
 	PageInfo() *iterator.PageInfo
-
-	embedToIncludeNewMethods()
 }
 
 type Uploader interface {
@@ -157,6 +137,4 @@ type Uploader interface {
 	SetIgnoreUnknownValues(bool)
 	SetTableTemplateSuffix(string)
 	Put(context.Context, interface{}) error
-
-	embedToIncludeNewMethods()
 }
