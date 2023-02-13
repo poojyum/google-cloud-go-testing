@@ -33,16 +33,12 @@ type Client interface {
 	JobFromID(context.Context, string) (Job, error)
 	JobFromIDLocation(context.Context, string, string) (Job, error)
 	Jobs(context.Context) JobIterator
-
-	embedToIncludeNewMethods()
 }
 
 type Copier interface {
 	JobIDConfig() *bigquery.JobIDConfig
 	SetCopyConfig(CopyConfig)
 	Run(context.Context) (Job, error)
-
-	embedToIncludeNewMethods()
 }
 
 type Dataset interface {
