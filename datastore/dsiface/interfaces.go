@@ -36,8 +36,6 @@ type Client interface {
 	PutMulti(ctx context.Context, keys []*datastore.Key, src interface{}) (ret []*datastore.Key, err error)
 	Run(ctx context.Context, q *datastore.Query) Iterator
 	RunInTransaction(ctx context.Context, f func(tx Transaction) error, opts ...datastore.TransactionOption) (cmt Commit, err error)
-
-	embedToIncludeNewMethods()
 }
 
 // Transaction is the interface that wraps a datastore.Transaction.
@@ -51,21 +49,15 @@ type Transaction interface {
 	Put(key *datastore.Key, src interface{}) (*datastore.PendingKey, error)
 	PutMulti(keys []*datastore.Key, src interface{}) (ret []*datastore.PendingKey, err error)
 	Rollback() (err error)
-
-	embedToIncludeNewMethods()
 }
 
 // Iterator is the interface that wraps a datastore.Iterator.
 type Iterator interface {
 	Cursor() (c datastore.Cursor, err error)
 	Next(dst interface{}) (k *datastore.Key, err error)
-
-	embedToIncludeNewMethods()
 }
 
 // Commit is the interface that wraps a datastore.Commit.
 type Commit interface {
 	Key(p *datastore.PendingKey) *datastore.Key
-
-	embedToIncludeNewMethods()
 }
