@@ -24,23 +24,17 @@ type Client interface {
 	Topic(id string) Topic
 	CreateSubscription(ctx context.Context, id string, cfg SubscriptionConfig) (Subscription, error)
 	Subscription(id string) Subscription
-
-	embedToIncludeNewMethods()
 }
 
 type Topic interface {
 	String() string
 	Publish(ctx context.Context, msg Message) PublishResult
-
-	embedToIncludeNewMethods()
 }
 
 type Subscription interface {
 	Exists(ctx context.Context) (bool, error)
 	Receive(ctx context.Context, f func(context.Context, Message)) error
 	Delete(ctx context.Context) error
-
-	embedToIncludeNewMethods()
 }
 
 type Message interface {
@@ -50,12 +44,8 @@ type Message interface {
 	PublishTime() time.Time
 	Ack()
 	Nack()
-
-	embedToIncludeNewMethods()
 }
 
 type PublishResult interface {
 	Get(ctx context.Context) (serverID string, err error)
-
-	embedToIncludeNewMethods()
 }
